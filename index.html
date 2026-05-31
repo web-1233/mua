@@ -1,0 +1,978 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOAH MUA & BEAUTY STUDIO | Luxury Makeup Artist</title>
+    <meta name="description" content="Jasa Makeup Artist Profesional, Mewah, dan Eksklusif.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-color: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --gold-primary: #D4AF37;
+            --gold-light: #F1D679;
+            --gold-dark: #AA8C2C;
+            --glass-bg: rgba(20, 20, 20, 0.85);
+            --glass-border: rgba(212, 175, 55, 0.15);
+            --font-heading: 'Playfair Display', serif;
+            --font-accent: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition-speed: 0.4s;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f9f9f9;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(0,0,0,0.02);
+            --text-color: #1a1a1a;
+            --text-muted: #555555;
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color var(--transition-speed);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--gold-primary);
+            margin-bottom: 1rem;
+        }
+        .accent-font { font-family: var(--font-accent); letter-spacing: 2px; text-transform: uppercase; }
+        a { text-decoration: none; color: inherit; transition: var(--transition-speed); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        
+        /* Utilities */
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 100px 0; }
+        .text-center { text-align: center; }
+        .text-gold { color: var(--gold-primary); }
+        .flex-center { display: flex; justify-content: center; align-items: center; }
+
+        /* Gold Gradient Text */
+        .gold-text-gradient {
+            background: linear-gradient(45deg, var(--gold-dark), var(--gold-primary), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            font-family: var(--font-accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--gold-primary); z-index: -1; transition: all 0.3s ease;
+        }
+        .btn:hover::before { width: 100%; }
+        .btn:hover { color: var(--bg-color); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        .btn-fill { background: var(--gold-primary); color: var(--bg-color); }
+        .btn-fill:hover { background: transparent; color: var(--gold-primary); }
+
+        /* --- LOADER --- */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+        }
+        .loader-logo { font-family: var(--font-accent); font-size: 2rem; color: var(--gold-primary); letter-spacing: 5px; animation: pulse 1.5s infinite; }
+        .loader-line { width: 200px; height: 1px; background: #222; margin-top: 20px; position: relative; overflow: hidden; }
+        .loader-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--gold-primary); animation: load 1.5s ease-in-out forwards; }
+        @keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 0; z-index: 1000;
+            transition: 0.4s; background: rgba(0,0,0,0); border-bottom: 1px solid transparent;
+        }
+        nav.scrolled {
+            background: var(--glass-bg); backdrop-filter: blur(15px);
+            padding: 15px 0; border-bottom: 1px solid var(--glass-border);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-accent); font-size: 1.2rem; font-weight: 800; color: var(--gold-primary); }
+        
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text-color); cursor: pointer; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px;
+            background: var(--gold-primary); transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--gold-primary); }
+
+        .nav-icons { display: flex; gap: 15px; align-items: center; }
+        .theme-toggle { cursor: pointer; color: var(--gold-primary); font-size: 1.2rem; }
+        .mobile-menu-btn { display: none; color: var(--text-color); font-size: 1.5rem; cursor: pointer; }
+
+        /* --- VIEWS --- */
+        #main-view { display: block; }
+        #pricelist-view { display: none; min-height: 100vh; padding-top: 100px; background: var(--bg-color); }
+
+        /* --- HERO --- */
+        #home { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center; filter: brightness(0.4); z-index: -1;
+            animation: zoomSlow 20s infinite alternate;
+        }
+        @keyframes zoomSlow { from { transform: scale(1); } to { transform: scale(1.1); } }
+        .hero-content { text-align: center; z-index: 1; padding: 0 20px; opacity: 1; animation: fadeInUp 1s ease-out; }
+        .hero-title { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; color: #fff; }
+        .hero-tagline { font-size: 1.1rem; letter-spacing: 3px; color: var(--gold-primary); margin-bottom: 30px; font-family: var(--font-accent); }
+        
+        /* --- STATS --- */
+        .stats-container { display: flex; justify-content: center; gap: 40px; margin-top: 60px; flex-wrap: wrap; }
+        .stat-item h3 { font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 5px; font-family: var(--font-accent); }
+        .stat-item p { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- FEATURES --- */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 40px; }
+        .feature-box { text-align: center; padding: 20px; border: 1px solid var(--glass-border); transition: 0.3s; }
+        .feature-box:hover { border-color: var(--gold-primary); transform: translateY(-5px); }
+        .feature-box i { font-size: 2rem; color: var(--gold-primary); margin-bottom: 15px; }
+
+        /* --- SERVICES --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card {
+            background: var(--bg-card); border: 1px solid var(--glass-border);
+            padding: 40px 20px; text-align: center; transition: 0.3s;
+        }
+        .service-card:hover { border-color: var(--gold-primary); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .service-icon { font-size: 3rem; color: var(--gold-primary); margin-bottom: 20px; }
+
+        /* --- PRICING (Standard Cards) --- */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
+        .price-card {
+            background: var(--bg-secondary); border: 1px solid var(--glass-border);
+            padding: 40px; text-align: center; position: relative; overflow: hidden;
+        }
+        .price-card.featured { border: 2px solid var(--gold-primary); transform: scale(1.05); z-index: 2; }
+        .price-card.featured::after {
+            content: 'BEST'; position: absolute; top: 20px; right: -30px;
+            background: var(--gold-primary); color: #000; padding: 5px 40px;
+            transform: rotate(45deg); font-size: 0.7rem; font-weight: bold;
+        }
+        .price { font-size: 2.5rem; color: var(--gold-primary); font-family: var(--font-heading); margin: 20px 0; }
+        .price-features { margin-bottom: 30px; text-align: left; }
+        .price-features li { margin-bottom: 10px; font-size: 0.9rem; color: var(--text-muted); }
+        .price-features i { color: var(--gold-primary); margin-right: 10px; }
+
+        /* --- PRICELIST PAGE (Full Image) --- */
+        .pricelist-hero { text-align: center; margin-bottom: 50px; }
+        .pricelist-container {
+            position: relative; width: 100%; max-width: 800px; margin: 0 auto;
+            border: 2px solid var(--gold-primary); padding: 10px; box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            cursor: zoom-in;
+        }
+        .pricelist-container img { width: 100%; height: auto; display: block; border: 1px solid var(--glass-border); }
+        .pricelist-overlay-msg {
+            position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8);
+            color: #fff; padding: 5px 15px; font-size: 0.8rem; border-radius: 20px; pointer-events: none;
+        }
+        .pricelist-actions { display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
+
+        /* --- PORTFOLIO --- */
+        .filter-buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .filter-btn { padding: 8px 20px; border: 1px solid var(--glass-border); background: transparent; color: var(--text-color); cursor: pointer; transition: 0.3s; }
+        .filter-btn.active, .filter-btn:hover { background: var(--gold-primary); color: #000; border-color: var(--gold-primary); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; }
+        .gallery-item { position: relative; height: 350px; overflow: hidden; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .gallery-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; opacity: 0; transition: 0.3s;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        
+        /* Before/After Slider */
+        .ba-slider {
+            position: relative; width: 100%; max-width: 600px; height: 400px;
+            margin: 0 auto 50px; overflow: hidden; border: 2px solid var(--gold-primary);
+        }
+        .ba-image-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .ba-after { width: 50%; border-right: 2px solid #fff; z-index: 2; }
+        .ba-handle {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 40px; height: 40px; background: var(--gold-primary); border-radius: 50%; z-index: 3;
+            cursor: ew-resize; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonial-slider {
+            max-width: 800px; margin: 0 auto; text-align: center;
+            padding: 40px; background: var(--bg-card); border: 1px solid var(--glass-border);
+        }
+        .testimonial-item { display: none; animation: fadeEffect 1s; }
+        .testimonial-item.active { display: block; }
+        .client-img { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 20px; border: 2px solid var(--gold-primary); object-fit: cover; }
+        .stars { color: var(--gold-primary); margin-bottom: 15px; }
+
+        /* --- TIMELINE --- */
+        .timeline { position: relative; max-width: 800px; margin: 40px auto; }
+        .timeline::before {
+            content: ''; position: absolute; top: 0; left: 50%; width: 2px; height: 100%;
+            background: var(--glass-border); transform: translateX(-50%);
+        }
+        .timeline-item { margin-bottom: 40px; position: relative; width: 50%; padding: 0 40px; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        .timeline-dot {
+            position: absolute; top: 0; width: 20px; height: 20px; background: var(--gold-primary);
+            border-radius: 50%; z-index: 2; box-shadow: 0 0 10px var(--gold-primary);
+        }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -10px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -10px; }
+
+        /* --- CONTACT --- */
+        .form-group { margin-bottom: 20px; }
+        .form-control { width: 100%; padding: 15px; background: var(--bg-secondary); border: 1px solid var(--glass-border); color: var(--text-color); font-family: var(--font-body); }
+        
+        /* --- FOOTER --- */
+        footer { background: #050505; padding: 80px 0 20px; border-top: 1px solid var(--gold-dark); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .social-links a { display: inline-flex; width: 40px; height: 40px; border: 1px solid var(--glass-border); align-items: center; justify-content: center; margin-right: 10px; color: var(--gold-primary); transition: 0.3s; }
+        .social-links a:hover { background: var(--gold-primary); color: #000; }
+        .copyright { text-align: center; padding-top: 20px; border-top: 1px solid #222; font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; }
+
+        /* --- FLOATING & MODALS --- */
+        .float-wa {
+            position: fixed; bottom: 30px; right: 30px; background: #25d366; color: #fff;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 100;
+        }
+        #lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:10001; justify-content:center; align-items:center; flex-direction: column; }
+        #lightbox img { max-width:90%; max-height:90%; border: 2px solid var(--gold-primary); }
+        
+        /* --- ADMIN PANEL --- */
+        .admin-trigger { cursor: pointer; font-size: 0.8rem; color: #444; text-decoration: underline; }
+        #admin-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 10000; justify-content: center; align-items: center;
+        }
+        .admin-content {
+            background: var(--bg-secondary); width: 90%; max-width: 600px; height: 90vh;
+            border: 1px solid var(--gold-primary); padding: 20px; overflow-y: auto; display: flex; flex-direction: column;
+        }
+        .admin-group { margin-bottom: 25px; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; }
+        .admin-group h5 { color: var(--gold-light); margin-bottom: 10px; font-family: var(--font-accent); font-size: 0.9rem; }
+        .admin-label { display: block; margin-bottom: 5px; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;}
+        .admin-input { width: 100%; padding: 10px; background: #000; border: 1px solid #333; color: #fff; margin-bottom: 10px; font-size:0.9rem; }
+        .admin-textarea { width: 100%; padding: 10px; background: #000; border: 1px solid #333; color: #fff; height: 80px; margin-bottom: 10px; font-family: monospace; font-size: 0.8rem; }
+        .file-upload { font-size: 0.8rem; color: var(--gold-primary); cursor: pointer; display: block; margin-bottom: 10px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--bg-secondary); flex-direction: column; padding: 20px; }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero-title { font-size: 2.5rem; }
+            .price-card.featured { transform: scale(1); }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 50px; text-align: left !important; }
+            .timeline-item:nth-child(even) { left: 0; }
+            .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot { left: 10px; right: auto; }
+        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeEffect { from {opacity: 0} to {opacity: 1} }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <!-- LOADING SCREEN -->
+    <div id="loader">
+        <div class="loader-logo">NOAH MUA</div>
+        <div class="loader-line"><div class="loader-progress"></div></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <div class="logo">NOAH <span class="text-gold">MUA</span></div>
+            <div class="nav-links" id="navLinks">
+                <a onclick="switchView('main')">Home</a>
+                <a onclick="switchView('main'); scrollToId('about')">Tentang Kami</a>
+                <a onclick="switchView('main'); scrollToId('services')">Layanan</a>
+                <a onclick="switchView('pricelist')" style="color:var(--gold-primary)">Pricelist</a>
+                <a onclick="switchView('main'); scrollToId('portfolio')">Portfolio</a>
+                <a onclick="switchView('main'); scrollToId('testimonials')">Testimoni</a>
+                <a onclick="switchView('main'); scrollToId('blog')">Blog</a>
+                <a onclick="switchView('main'); scrollToId('contact')">Kontak</a>
+                <a onclick="switchView('main'); scrollToId('contact')" class="btn-fill" style="padding: 5px 15px; font-size: 0.7rem;">Booking</a>
+            </div>
+            <div class="nav-icons">
+                <i class="fas fa-moon theme-toggle" id="themeToggle"></i>
+                <div class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT VIEW -->
+    <div id="main-view">
+        
+        <!-- Hero Section -->
+        <section id="home">
+            <div class="hero-bg" id="hero-bg"></div>
+            <div class="hero-content">
+                <p class="hero-tagline" id="hero-tagline">Enhancing Beauty, Creating Confidence</p>
+                <h1 class="hero-title accent-font" id="hero-title">NOAH MUA &<br>BEAUTY STUDIO</h1>
+                <div class="hero-btns" style="margin-bottom: 40px;">
+                    <button onclick="scrollToId('contact')" class="btn btn-fill">Booking Sekarang</button>
+                    <button onclick="scrollToId('portfolio')" class="btn">Lihat Portfolio</button>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="stat-item"><h3 data-target="500">0</h3><p>Client Puas</p></div>
+                    <div class="stat-item"><h3 data-target="1000">0</h3><p>Makeup Selesai</p></div>
+                    <div class="stat-item"><h3 data-target="5">0</h3><p>Tahun Pengalaman</p></div>
+                    <div class="stat-item"><h3 data-target="4.9">0</h3><p>Rating</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Us -->
+        <section class="section-padding" style="background: var(--bg-secondary)">
+            <div class="container">
+                <div class="text-center">
+                    <h4 class="accent-font text-gold">Kenapa Memilih Kami</h4>
+                    <h2 class="gold-text-gradient">Keunggulan Profesional</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-box"><i class="fas fa-hourglass-half"></i><h4>Tahan Lama</h4></div>
+                    <div class="feature-box"><i class="fas fa-certificate"></i><h4>Produk Premium</h4></div>
+                    <div class="feature-box"><i class="fas fa-user-tie"></i><h4>Berpengalaman</h4></div>
+                    <div class="feature-box"><i class="fas fa-home"></i><h4>Home Service</h4></div>
+                    <div class="feature-box"><i class="fas fa-clock"></i><h4>Tepat Waktu</h4></div>
+                    <div class="feature-box"><i class="fas fa-tags"></i><h4>Harga Transparan</h4></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section-padding">
+            <div class="container">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:50px; align-items:center;">
+                    <div><img id="owner-img" src="" alt="Owner" style="border-radius:5px; box-shadow:-20px 20px 0 var(--gold-dark);"></div>
+                    <div>
+                        <h4 class="accent-font text-gold">Tentang Kami</h4>
+                        <h2>Master of Beauty</h2>
+                        <p class="text-muted" id="about-desc">Noah MUA adalah spesialis kecantikan profesional dengan pengalaman lebih dari 5 tahun dalam industri pernikahan dan fashion.</p>
+                        
+                        <div class="timeline">
+                            <div class="timeline-item"><div class="timeline-dot"></div><h5>2018</h5><p class="text-muted">Awal Karir Freelance</p></div>
+                            <div class="timeline-item"><div class="timeline-dot"></div><h5>2020</h5><p class="text-muted">Sertifikasi London</p></div>
+                            <div class="timeline-item"><div class="timeline-dot"></div><h5>2023</h5><p class="text-muted">Membuka Studio</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="section-padding" style="background:var(--bg-secondary)">
+            <div class="container">
+                <div class="text-center" style="margin-bottom: 50px;"><h4 class="accent-font text-gold">Layanan Kami</h4><h2>Exclusive Packages</h2></div>
+                <div class="services-grid">
+                    <div class="service-card"><i class="fas fa-ring service-icon"></i><h3>Bridal Makeup</h3><p class="text-muted">Makeup pengantin abadi.</p></div>
+                    <div class="service-card"><i class="fas fa-heart service-icon"></i><h3>Engagement</h3><p class="text-muted">Momen lamaran spesial.</p></div>
+                    <div class="service-card"><i class="fas fa-graduation-cap service-icon"></i><h3>Graduation</h3><p class="text-muted">Tampil cantik saat wisuda.</p></div>
+                    <div class="service-card"><i class="fas fa-camera service-icon"></i><h3>Photoshoot</h3><p class="text-muted">HD Makeup untuk kamera.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Summary (Cards) -->
+        <section id="pricing-cards" class="section-padding">
+            <div class="container">
+                <div class="text-center">
+                    <h4 class="accent-font text-gold">Investasi Kecantikan</h4>
+                    <h2>Paket Populer</h2>
+                    <p class="text-muted">Lihat detail lengkap di halaman <a onclick="switchView('pricelist')" style="text-decoration:underline; cursor:pointer; color:var(--gold-primary)">Pricelist</a></p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <h4>Silver</h4>
+                        <div class="price" id="price-silver">Rp 500.000</div>
+                        <ul class="price-features"><li><i class="fas fa-check"></i> Makeup Basic</li><li><i class="fas fa-check"></i> Hairdo</li></ul>
+                        <button onclick="scrollToId('contact'); setPkg('Silver')" class="btn">Pilih</button>
+                    </div>
+                    <div class="price-card featured">
+                        <h4>Platinum</h4>
+                        <div class="price" id="price-platinum">Rp 3.000.000</div>
+                        <ul class="price-features"><li><i class="fas fa-check"></i> Full HD Makeup</li><li><i class="fas fa-check"></i> Premium Hairdo</li></ul>
+                        <button onclick="scrollToId('contact'); setPkg('Platinum')" class="btn btn-fill">Pilih</button>
+                    </div>
+                    <div class="price-card">
+                        <h4>Wedding</h4>
+                        <div class="price" id="price-wedding">Rp 5.000.000+</div>
+                        <ul class="price-features"><li><i class="fas fa-check"></i> Full Day Service</li><li><i class="fas fa-check"></i> Unlimited Consult</li></ul>
+                        <button onclick="scrollToId('contact'); setPkg('Wedding')" class="btn">Pilih</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio -->
+        <section id="portfolio" class="section-padding" style="background:var(--bg-secondary)">
+            <div class="container">
+                <div class="text-center" style="margin-bottom: 50px;"><h4 class="accent-font text-gold">Galeri</h4><h2>Masterpiece</h2></div>
+                
+                <!-- Before/After -->
+                <div style="margin-bottom:50px; text-align:center;"><h4 class="text-gold">Before & After</h4></div>
+                <div class="ba-slider" id="baSlider">
+                    <div class="ba-image-container"><img id="ba-before" src="" style="width:100%; height:100%; object-fit:cover;"></div>
+                    <div class="ba-image-container ba-after" id="ba-after-div"><img id="ba-after" src="" style="width:100%; height:100%; object-fit:cover; filter:grayscale(1);"></div>
+                    <div class="ba-handle" id="baHandle"><i class="fas fa-arrows-alt-h" style="color:#000;"></i></div>
+                </div>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterGal('all')">All</button>
+                    <button class="filter-btn" onclick="filterGal('wedding')">Wedding</button>
+                    <button class="filter-btn" onclick="filterGal('party')">Party</button>
+                </div>
+                <div class="gallery-grid" id="galleryGrid"></div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="section-padding">
+            <div class="container">
+                <h2 class="text-center accent-font" style="margin-bottom: 40px;">Kata Mereka</h2>
+                <div class="testimonial-slider" id="testimonial-container">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Video & Blog -->
+        <section class="section-padding" style="background:var(--bg-secondary)">
+            <div class="container text-center">
+                <h2 class="accent-font text-gold">Video Hasil</h2>
+                <p class="text-muted">Cek Instagram & TikTok kami untuk video makeup reel.</p>
+                <div style="margin-top:20px; display:flex; justify-content:center; gap:20px;">
+                    <a id="link-insta" href="#" target="_blank" class="btn"><i class="fab fa-instagram"></i> Instagram Reels</a>
+                    <a id="link-tiktok" href="#" target="_blank" class="btn"><i class="fab fa-tiktok"></i> TikTok</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Process -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="text-center accent-font text-gold">Alur Booking</h2>
+                <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap; margin-top:40px; text-align:center;">
+                    <div style="flex:1; min-width:150px;"><div style="width:50px; height:50px; border:2px solid var(--gold-primary); border-radius:50%; margin:0 auto 10px; display:flex; align-items:center; justify-content:center;">1</div><h5>Pilih Paket</h5></div>
+                    <div style="flex:1; min-width:150px;"><div style="width:50px; height:50px; border:2px solid var(--gold-primary); border-radius:50%; margin:0 auto 10px; display:flex; align-items:center; justify-content:center;">2</div><h5>Hubungi Admin</h5></div>
+                    <div style="flex:1; min-width:150px;"><div style="width:50px; height:50px; border:2px solid var(--gold-primary); border-radius:50%; margin:0 auto 10px; display:flex; align-items:center; justify-content:center;">3</div><h5>Bayar DP</h5></div>
+                    <div style="flex:1; min-width:150px;"><div style="width:50px; height:50px; border:2px solid var(--gold-primary); border-radius:50%; margin:0 auto 10px; display:flex; align-items:center; justify-content:center;">4</div><h5>Hari H</h5></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-padding" style="background:var(--bg-secondary)">
+            <div class="container" style="max-width:800px;">
+                <h2 class="text-center accent-font text-gold" style="margin-bottom:30px;">FAQ</h2>
+                <details style="margin-bottom:15px; border-bottom:1px solid var(--glass-border); padding-bottom:10px;">
+                    <summary style="cursor:pointer; color:var(--gold-primary);">Apakah bisa panggilan ke rumah?</summary>
+                    <p class="text-muted" style="margin-top:10px;">Ya, kami melayani home service dengan biaya transportasi menyesuaikan.</p>
+                </details>
+                <details style="margin-bottom:15px; border-bottom:1px solid var(--glass-border); padding-bottom:10px;">
+                    <summary style="cursor:pointer; color:var(--gold-primary);">Berapa DP?</summary>
+                    <p class="text-muted" style="margin-top:10px;">Minimal DP 30% dari total paket.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section-padding">
+            <div class="container">
+                <div class="text-center" style="margin-bottom: 50px;"><h4 class="accent-font text-gold">Hubungi Kami</h4><h2>Booking Sekarang</h2></div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:50px;">
+                    <div>
+                        <p class="text-muted"><i class="fas fa-map-marker-alt text-gold"></i> <span id="contact-addr">Jakarta Selatan</span></p>
+                        <p class="text-muted" style="margin:10px 0;"><i class="fab fa-whatsapp text-gold"></i> <span id="contact-wa">6281234567890</span></p>
+                        <div style="width:100%; height:200px; background:#333; margin-top:20px; display:flex; align-items:center; justify-content:center; color:#777;">Google Maps Area</div>
+                    </div>
+                    <form id="bookingForm">
+                        <div class="form-group"><input type="text" id="b-name" class="form-control" placeholder="Nama" required></div>
+                        <div class="form-group"><input type="text" id="b-phone" class="form-control" placeholder="No WA" required></div>
+                        <div class="form-group"><input type="date" id="b-date" class="form-control" required></div>
+                        <div class="form-group"><select id="b-pkg" class="form-control"><option value="">Pilih Paket</option></select></div>
+                        <div class="form-group"><textarea id="b-msg" class="form-control" rows="3" placeholder="Pesan"></textarea></div>
+                        <button type="submit" class="btn btn-fill" style="width:100%">Kirim Booking</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Banner -->
+        <section style="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://picsum.photos/seed/cta/1200/400') center/cover; padding: 80px 0; text-align:center;">
+            <h2 class="text-white" style="font-family:var(--font-heading)">Siap tampil cantik di hari spesialmu?</h2>
+            <button onclick="scrollToId('contact')" class="btn btn-fill" style="margin-top:20px;">Booking Sekarang</button>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div><div class="footer-logo">NOAH MUA</div><p class="text-muted">Enhancing Beauty, Creating Confidence.</p></div>
+                    <div><h4>Links</h4><ul><li><a onclick="switchView('main'); scrollToId('home')">Home</a></li><li><a onclick="switchView('pricelist')">Pricelist</a></li></ul></div>
+                    <div><h4>Social</h4><div class="social-links"><a id="f-insta" href="#"><i class="fab fa-instagram"></i></a><a id="f-tiktok" href="#"><i class="fab fa-tiktok"></i></a></div></div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 Noah MUA.</p>
+                    <span class="admin-trigger" onclick="openAdmin()">Admin Dashboard</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PRICELIST VIEW (SEPARATE PAGE SIMULATION) -->
+    <div id="pricelist-view">
+        <div class="container">
+            <div class="pricelist-hero">
+                <p class="text-gold accent-font">Resmi & Terbaru</p>
+                <h1 class="accent-font" style="font-size: 3rem;">Daftar Harga Paket Makeup</h1>
+                <p class="text-muted">Lihat seluruh paket dan harga terbaru kami melalui pricelist resmi berikut.</p>
+                <div style="margin-top:20px;"><button onclick="switchView('main')" class="btn" style="padding: 5px 15px; font-size:0.7rem;">&larr; Kembali</button></div>
+            </div>
+
+            <div class="pricelist-container" onclick="zoomImg()">
+                <img id="pricelist-img" src="" alt="Pricelist">
+                <div class="pricelist-overlay-msg"><i class="fas fa-search-plus"></i> Klik untuk Zoom</div>
+            </div>
+
+            <div class="pricelist-actions">
+                <button onclick="downloadImg()" class="btn"><i class="fas fa-download"></i> Download</button>
+                <a id="btn-wa-price" href="#" target="_blank" class="btn btn-fill"><i class="fab fa-whatsapp"></i> Booking Sekarang</a>
+            </div>
+
+            <!-- Reusing Pricing Grid below image for SEO/Accessibility -->
+            <div style="margin-top: 80px;">
+                 <div class="pricing-grid">
+                    <div class="price-card"><h4>Silver</h4><p class="price" id="p2-silver">Rp 500k</p></div>
+                    <div class="price-card featured"><h4>Gold</h4><p class="price" id="p2-gold">Rp 1.5jt</p></div>
+                    <div class="price-card"><h4>Platinum</h4><p class="price" id="p2-platinum">Rp 3jt</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <a id="float-wa" class="float-wa" href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <div id="lightbox" onclick="this.style.display='none'"><img id="lb-img" src=""></div>
+
+    <!-- ADMIN MODAL (UPDATED FOR ALL IMAGES) -->
+    <div id="admin-modal">
+        <div class="admin-content">
+            <h3 class="accent-font text-gold" style="text-align:center;">Admin Dashboard</h3>
+            <p class="text-muted" style="text-align:center; margin-bottom:20px; font-size:0.8rem;">Edit Semua Foto & Teks disini.</p>
+
+            <!-- Contact & Links -->
+            <div class="admin-group">
+                <h5>Kontak & Link</h5>
+                <label class="admin-label">Nomor WhatsApp</label>
+                <input type="text" id="adm-wa" class="admin-input">
+                <label class="admin-label">Alamat</label>
+                <input type="text" id="adm-addr" class="admin-input">
+                <label class="admin-label">Link Instagram</label>
+                <input type="text" id="adm-insta" class="admin-input">
+                <label class="admin-label">Link TikTok</label>
+                <input type="text" id="adm-tiktok" class="admin-input">
+            </div>
+
+            <!-- Text Content -->
+            <div class="admin-group">
+                <h5>Teks Website</h5>
+                <label class="admin-label">Tagline Hero</label>
+                <input type="text" id="adm-tagline" class="admin-input">
+                <label class="admin-label">Judul Hero</label>
+                <input type="text" id="adm-title" class="admin-input">
+                <label class="admin-label">Deskripsi About</label>
+                <textarea id="adm-about" class="admin-textarea"></textarea>
+            </div>
+
+            <!-- Prices -->
+            <div class="admin-group">
+                <h5>Harga Paket</h5>
+                <input type="text" id="adm-p-silver" class="admin-input" placeholder="Harga Silver">
+                <input type="text" id="adm-p-platinum" class="admin-input" placeholder="Harga Platinum">
+                <input type="text" id="adm-p-wedding" class="admin-input" placeholder="Harga Wedding">
+            </div>
+
+            <!-- MAIN IMAGES (UPLOAD) -->
+            <div class="admin-group">
+                <h5>Gambar Utama (Upload File)</h5>
+                <label class="admin-label">1. Banner Beranda (Background)</label>
+                <input type="file" id="file-hero" accept="image/*" class="file-upload">
+                <label class="admin-label">2. Foto Owner</label>
+                <input type="file" id="file-owner" accept="image/*" class="file-upload">
+                <label class="admin-label">3. Foto Pricelist</label>
+                <input type="file" id="file-price" accept="image/*" class="file-upload">
+                <label class="admin-label">4. Foto Before (Slider)</label>
+                <input type="file" id="file-before" accept="image/*" class="file-upload">
+                <label class="admin-label">5. Foto After (Slider)</label>
+                <input type="file" id="file-after" accept="image/*" class="file-upload">
+                <p style="font-size:0.7rem; color:#777;">*Gunakan foto kecil/resolusi rendah agar cepat.</p>
+            </div>
+
+            <!-- GALLERY (URLS) -->
+            <div class="admin-group">
+                <h5>Galeri Portfolio (Link Foto)</h5>
+                <label class="admin-label">Tempel Link Foto Portfolio (Pisahkan dengan Enter/Baris Baru)</label>
+                <textarea id="adm-gallery-urls" class="admin-textarea" style="height:100px" placeholder="https://linkfoto1.com&#10;https://linkfoto2.com"></textarea>
+            </div>
+
+            <!-- TESTIMONIALS (URLS) -->
+            <div class="admin-group">
+                <h5>Foto Testimoni (Link Foto)</h5>
+                <label class="admin-label">Tempel Link Foto Pelanggan (Pisahkan dengan Enter/Baris Baru)</label>
+                <textarea id="adm-testi-urls" class="admin-textarea" style="height:100px" placeholder="https://linkfoto1.com&#10;https://linkfoto2.com"></textarea>
+            </div>
+
+            <div style="text-align:right; margin-top:20px;">
+                <button class="btn" onclick="closeAdmin()">Batal</button>
+                <button class="btn btn-fill" onclick="saveAdmin()">Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA DEFAULT ---
+        const defaultData = {
+            wa: "6281234567890",
+            address: "Jl. Kecantikan No. 88, Jakarta Selatan",
+            insta: "https://instagram.com",
+            tiktok: "https://tiktok.com",
+            tagline: "Enhancing Beauty, Creating Confidence",
+            heroTitle: "NOAH MUA & BEAUTY STUDIO",
+            aboutDesc: "Noah MUA adalah spesialis kecantikan profesional dengan pengalaman lebih dari 5 tahun.",
+            // Default Images (Placeholders)
+            heroImg: "her.jpg",
+            ownerImg: "ow.jpg",
+            pricelistImg: "pl.jpg",
+            beforeImg: "after.jpg",
+            afterImg: "before.jpg",
+            // Default Gallery URLs
+            galleryUrls: [
+                "p1.jpg",
+                "p2.jpg",
+                "p3.jpg",
+                "p4.jpg",
+                "p5.jpg",
+                "p6.jpg"
+            ],
+            // Default Testimonial Photo URLs
+            testiUrls: [
+                "https://picsum.photos/seed/user1/100/100",
+                "https://picsum.photos/seed/user2/100/100",
+                "https://picsum.photos/seed/user3/100/100"
+            ],
+            prices: { silver: "Rp 500.000", platinum: "Rp 3.000.000", wedding: "Rp 5.000.000+" },
+            testimonials: [
+                { name: "Putri A.", text: "Makeupnya tahan lama banget!" },
+                { name: "Rina M.", text: "Hasil natural dan glowing." },
+                { name: "Sarah W.", text: "Recommended banget buat wisuda." }
+            ]
+        };
+
+        // --- CORE ---
+        window.onload = function() {
+            setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 1500); 
+            
+            const saved = localStorage.getItem('noahMuaData');
+            const data = saved ? JSON.parse(saved) : defaultData;
+            applyData(data);
+            initGallery(data.galleryUrls);
+            initTestimonials(data.testimonials, data.testiUrls);
+            initStats();
+        };
+
+        function applyData(data) {
+            // Text
+            document.getElementById('hero-tagline').innerText = data.tagline;
+            document.getElementById('hero-title').innerText = data.heroTitle;
+            document.getElementById('about-desc').innerText = data.aboutDesc;
+            document.getElementById('contact-wa').innerText = data.wa;
+            document.getElementById('contact-addr').innerText = data.address;
+            
+            // Prices
+            document.getElementById('price-silver').innerText = data.prices.silver;
+            document.getElementById('price-platinum').innerText = data.prices.platinum;
+            document.getElementById('price-wedding').innerText = data.prices.wedding;
+            document.getElementById('p2-silver').innerText = data.prices.silver;
+            document.getElementById('p2-platinum').innerText = data.prices.platinum;
+            
+            // Links
+            const waMsg = "Halo Kak, saya sudah melihat pricelist dan ingin melakukan booking makeup.";
+            const waLink = `https://wa.me/${data.wa}?text=${waMsg}`;
+            document.getElementById('btn-wa-price').href = waLink;
+            document.getElementById('float-wa').href = `https://wa.me/${data.wa}?text=Halo Kak, saya ingin booking jasa makeup.`;
+            document.getElementById('link-insta').href = data.insta;
+            document.getElementById('link-tiktok').href = data.tiktok;
+            document.getElementById('f-insta').href = data.insta;
+            document.getElementById('f-tiktok').href = data.tiktok;
+
+            // Images
+            document.getElementById('hero-bg').style.backgroundImage = `url('${data.heroImg}')`;
+            document.getElementById('owner-img').src = data.ownerImg;
+            document.getElementById('pricelist-img').src = data.pricelistImg;
+            document.getElementById('ba-before').src = data.beforeImg;
+            document.getElementById('ba-after').src = data.afterImg;
+        }
+
+        // --- NAVIGATION ---
+        function switchView(view) {
+            document.getElementById('main-view').style.display = view === 'main' ? 'block' : 'none';
+            document.getElementById('pricelist-view').style.display = view === 'pricelist' ? 'block' : 'none';
+            window.scrollTo(0,0);
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        function scrollToId(id) {
+            document.getElementById('main-view').style.display = 'block';
+            document.getElementById('pricelist-view').style.display = 'none';
+            setTimeout(() => {
+                document.getElementById(id).scrollIntoView({behavior:'smooth'});
+            }, 100);
+        }
+
+        // --- ADMIN ---
+        function openAdmin() {
+            const data = JSON.parse(localStorage.getItem('noahMuaData')) || defaultData;
+            document.getElementById('adm-wa').value = data.wa;
+            document.getElementById('adm-addr').value = data.address;
+            document.getElementById('adm-tagline').value = data.tagline;
+            document.getElementById('adm-title').value = data.heroTitle;
+            document.getElementById('adm-about').value = data.aboutDesc;
+            document.getElementById('adm-p-silver').value = data.prices.silver;
+            document.getElementById('adm-p-platinum').value = data.prices.platinum;
+            document.getElementById('adm-p-wedding').value = data.prices.wedding;
+            document.getElementById('adm-insta').value = data.insta;
+            document.getElementById('adm-tiktok').value = data.tiktok;
+            
+            // Textareas for URLs
+            document.getElementById('adm-gallery-urls').value = data.galleryUrls.join('\n');
+            document.getElementById('adm-testi-urls').value = data.testiUrls.join('\n');
+
+            document.getElementById('admin-modal').style.display = 'flex';
+        }
+
+        function closeAdmin() { document.getElementById('admin-modal').style.display = 'none'; }
+
+        function fileToBase64(file, cb) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => cb(reader.result);
+            reader.onerror = error => console.log('Error: ', error);
+        }
+
+        function saveAdmin() {
+            let data = JSON.parse(localStorage.getItem('noahMuaData')) || defaultData;
+            
+            // Save Text
+            data.wa = document.getElementById('adm-wa').value;
+            data.address = document.getElementById('adm-addr').value;
+            data.tagline = document.getElementById('adm-tagline').value;
+            data.heroTitle = document.getElementById('adm-title').value;
+            data.aboutDesc = document.getElementById('adm-about').value;
+            data.prices.silver = document.getElementById('adm-p-silver').value;
+            data.prices.platinum = document.getElementById('adm-p-platinum').value;
+            data.prices.wedding = document.getElementById('adm-p-wedding').value;
+            data.insta = document.getElementById('adm-insta').value;
+            data.tiktok = document.getElementById('adm-tiktok').value;
+
+            // Save Textarea URLs (Split by newline)
+            const rawGal = document.getElementById('adm-gallery-urls').value;
+            data.galleryUrls = rawGal.split('\n').filter(url => url.trim() !== "");
+            
+            const rawTesti = document.getElementById('adm-testi-urls').value;
+            data.testiUrls = rawTesti.split('\n').filter(url => url.trim() !== "");
+
+            const finish = () => {
+                localStorage.setItem('noahMuaData', JSON.stringify(data));
+                applyData(data);
+                initGallery(data.galleryUrls); // Re-render gallery
+                initTestimonials(data.testimonials, data.testiUrls); // Re-render testis
+                alert('Data tersimpan!');
+                closeAdmin();
+            };
+
+            let tasks = 0;
+            const check = () => { if(tasks===0) finish(); };
+
+            // Handle File Uploads
+            if(document.getElementById('file-hero').files[0]) {
+                tasks++; fileToBase64(document.getElementById('file-hero').files[0], (r) => { data.heroImg = r; tasks--; check(); });
+            }
+            if(document.getElementById('file-owner').files[0]) {
+                tasks++; fileToBase64(document.getElementById('file-owner').files[0], (r) => { data.ownerImg = r; tasks--; check(); });
+            }
+            if(document.getElementById('file-price').files[0]) {
+                tasks++; fileToBase64(document.getElementById('file-price').files[0], (r) => { data.pricelistImg = r; tasks--; check(); });
+            }
+            if(document.getElementById('file-before').files[0]) {
+                tasks++; fileToBase64(document.getElementById('file-before').files[0], (r) => { data.beforeImg = r; tasks--; check(); });
+            }
+            if(document.getElementById('file-after').files[0]) {
+                tasks++; fileToBase64(document.getElementById('file-after').files[0], (r) => { data.afterImg = r; tasks--; check(); });
+            }
+            
+            if(tasks===0) finish();
+        }
+
+        // --- INTERACTION ---
+        function zoomImg() {
+            document.getElementById('lb-img').src = document.getElementById('pricelist-img').src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+        function downloadImg() {
+            const link = document.createElement('a');
+            link.href = document.getElementById('pricelist-img').src;
+            link.download = 'NoahMUA-Pricelist.jpg';
+            link.click();
+        }
+        
+        function setPkg(pkg) { document.getElementById('b-pkg').value = pkg; }
+        
+        document.getElementById('bookingForm').onsubmit = (e) => {
+            e.preventDefault();
+            const data = JSON.parse(localStorage.getItem('noahMuaData')) || defaultData;
+            const name = document.getElementById('b-name').value;
+            const pkg = document.getElementById('b-pkg').value;
+            window.open(`https://wa.me/${data.wa}?text=Halo Kak, nama saya ${name}. Saya mau booking paket ${pkg}.`, '_blank');
+        };
+
+        // --- GALLERY & SLIDER ---
+        function initGallery(urls) {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = ''; // Clear existing
+            
+            if(!urls || urls.length === 0) return;
+
+            urls.forEach(url => {
+                const d = document.createElement('div');
+                d.className = 'gallery-item';
+                d.innerHTML = `<img src="${url}"><div class="gallery-overlay"><h4 class="text-gold">View</h4></div>`;
+                d.onclick = () => { document.getElementById('lb-img').src = url; document.getElementById('lightbox').style.display = 'flex'; };
+                grid.appendChild(d);
+            });
+        }
+
+        function filterGal(cat) {
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(i => i.style.display = 'block'); 
+        }
+
+        function initTestimonials(list, urls) {
+            const c = document.getElementById('testimonial-container');
+            let h = '';
+            list.forEach((t,i) => {
+                const imgUrl = (urls && urls[i]) ? urls[i] : "https://picsum.photos/seed/user/100/100";
+                h += `<div class="testimonial-item ${i===0?'active':''}">
+                        <img src="${imgUrl}" class="client-img">
+                        <div class="stars">★★★★★</div>
+                        <p class="text-muted">"${t.text}"</p>
+                        <h5 class="text-gold">- ${t.name}</h5>
+                      </div>`;
+            });
+            c.innerHTML = h;
+            
+            let idx=0; const slides = document.querySelectorAll('.testimonial-item');
+            setInterval(() => {
+                if(slides.length === 0) return;
+                slides[idx].classList.remove('active');
+                idx = (idx+1)%slides.length;
+                slides[idx].classList.add('active');
+            }, 4000);
+        }
+
+        function initStats() {
+            const stats = document.querySelectorAll('[data-target]');
+            let done = false;
+            window.onscroll = () => {
+                if(done) return;
+                const rect = document.querySelector('.stats-container').getBoundingClientRect();
+                if(rect.top < window.innerHeight) {
+                    done = true;
+                    stats.forEach(s => {
+                        let t = +s.getAttribute('data-target');
+                        let c = 0; const inc = t/50;
+                        const u = setInterval(() => { c+=inc; if(c>=t) { c=t; clearInterval(u); } s.innerText = Math.ceil(c)+(t>50?'+':''); }, 30);
+                    });
+                }
+            };
+        }
+
+        // Before/After Slider Logic
+        const slider = document.getElementById('baSlider');
+        const afterDiv = document.getElementById('ba-after-div');
+        const handle = document.getElementById('baHandle');
+        let isDown = false;
+        function moveSlider(e) {
+            if(!isDown) return;
+            const rect = slider.getBoundingClientRect();
+            let x = (e.clientX || e.touches[0].clientX) - rect.left;
+            if(x<0) x=0; if(x>rect.width) x=rect.width;
+            afterDiv.style.width = x + "px";
+            handle.style.left = x + "px";
+        }
+        handle.addEventListener('mousedown', ()=>isDown=true);
+        handle.addEventListener('touchstart', ()=>isDown=true);
+        window.addEventListener('mouseup', ()=>isDown=false);
+        window.addEventListener('touchend', ()=>isDown=false);
+        slider.addEventListener('mousemove', moveSlider);
+        slider.addEventListener('touchmove', moveSlider);
+
+        // Theme Toggle
+        document.getElementById('themeToggle').onclick = () => {
+            const b = document.body;
+            b.setAttribute('data-theme', b.getAttribute('data-theme')==='dark'?'light':'dark');
+        };
+        document.getElementById('mobileMenuBtn').onclick = () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        };
+    </script>
+</body>
+</html>
